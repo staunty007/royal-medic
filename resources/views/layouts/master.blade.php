@@ -38,12 +38,12 @@
             <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
                 <!-- Sidebar - Brand -->
-                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+                <router-link class="sidebar-brand d-flex align-items-center justify-content-center" to="/dashboard">
                     <div class="sidebar-brand-icon rotate-n-15">
                         <i class="fas fa-laugh-wink"></i>
                     </div>
                     <div class="sidebar-brand-text mx-3">Royal Med</div>
-                </a>
+                </router-link>
 
                 <!-- Divider -->
                 <hr class="sidebar-divider my-0">
@@ -53,6 +53,11 @@
                     <router-link class="nav-link" to="/dashboard">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Dashboard</span></router-link>
+                </li>
+                <li class="nav-item">
+                    <router-link class="nav-link" to="/profile">
+                        <i class="fas fa-fw fa-user"></i>
+                        <span>Department</span></router-link>
                 </li>
 
                 <!-- Divider -->
@@ -67,28 +72,45 @@
                     </a>
                     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                         <div class="bg-white py-2 collapse-inner rounded">
-                            <router-link class="collapse-item" to='/users'>Users</router-link>
-                            <a class="collapse-item" href="cards.html">Cards</a>
+                            <router-link class="collapse-item" to='/doctors'>Doctor</router-link>
+                            <router-link class="collapse-item" to='/patients'>Patients</router-link>
+                            <a class="collapse-item" href="cards.html">Nurse</a>
                         </div>
                     </div>
                 </li>
 
-                <!-- Divider -->
-                <hr class="sidebar-divider">
-
                 <!-- Nav Item - Charts -->
+
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="fas fa-fw fa-cog"></i>
+                        <span>Schedule</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="fas fa-fw fa-cog"></i>
+                        <span>Appointment</span></a>
+                </li>
+
+                <!-- Nav Item - Tables -->
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="fas fa-fw fa-cog"></i>
+                        <span>Messages</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="fas fa-fw fa-cog"></i>
+                        <span>Settings</span></a>
+                </li>
+
                 <li class="nav-item">
                     <router-link class="nav-link" to="/profile">
                         <i class="fas fa-fw fa-user"></i>
                         <span>Profile</span></router-link>
                 </li>
 
-                <!-- Nav Item - Tables -->
-                <li class="nav-item">
-                    <a class="nav-link" href="tables.html">
-                        <i class="fas fa-fw fa-cog"></i>
-                        <span>Settings</span></a>
-                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();">

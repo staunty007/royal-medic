@@ -27,23 +27,17 @@
                              <div class="form-group col-md-6">
                                 <label for="inputState">Type</label>
                                 <select class="form-control" v-model="form.type">
-                                    <option value="user">User</option>
-                                    <option value="admin">Admin</option>option>
+                                    <option value="dentist">Dentist</option>
+                                    <option value="optician">Optician</option>
+                                    <option value="surgeon">Surgeon</option>
+                                    <option value="radiotherapy">Radiotherapy</option>
+                                    <option value="gynaecology">Gynaecology</option>
+                                    <option value="oncology">Oncology</option>
                                 </select>
                             </div>
                             
                         </div>
                         <div class="form-row">
-                            <template v-if="info == 'add'">
-                                <div class="form-group col-md-6">
-                                    <label for="">Password</label>
-                                    <input type="password" class="form-control" v-model="form.password">
-                                </div>
-                                <div class="form-group col-md-6">
-                                    <label for="">Cofirm Password</label>
-                                    <input type="password" class="form-control" v-model="form.password_confirmation">
-                                </div>
-                            </template>
                             <div class="form-group col-md-5">
                                 <div class="form-check">
                                     <input class="form-check-input" v-model="form.status" value="1" type="checkbox" id="gridCheck">
@@ -79,8 +73,6 @@
                 form: {
                     name: '',
                     email: '',
-                    password: '',
-                    password_confirmation: '',
                     mobile: '',
                     type:'',
                     status: 0,
@@ -101,7 +93,7 @@
                 this.loading = true;
                 this.success = '',
                 this.error = []
-                await axios.post('api/admin/user-create', this.form)
+                await axios.post('api/admin/doctor/create', this.form)
                 .then((res) => {
                     this.loading = false
                     console.log(res.data);
@@ -118,11 +110,11 @@
                 this.loading = true;
                 this.success = '',
                 this.error = []
-                await axios.post(`api/admin/user/${this.user.id}/update`, this.form)
+                await axios.post(`api/admin/doctor/${this.user.id}/update`, this.form)
                 .then((res) => {
                     this.loading = false
                     console.log(res.data.data);
-                    this.success= res.data.data[0]
+                    this.success= res.data.data
                     //let resp = resp.data[1];
                     setTimeout(() => {
                         this.$emit('closeModal');
@@ -140,7 +132,12 @@
                 if (value) {
                     this.form = value
                 }
+                this.error = [];
+                this.success = ''
                 console.log(value);return;
+            },
+            info(value) {
+                console.log(value);
             }
         }
     }
