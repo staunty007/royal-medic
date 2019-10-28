@@ -59,7 +59,8 @@
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label for="">Date of Birth</label>
-                                    <input type="date" class="form-control" v-model="form.biodata.dob">
+                                    <date-picker v-model="form.biodata.dob" :config="options"></date-picker>
+                                    <!-- <input type="date" class="form-control"  v-model="form.biodata.dob"> -->
                                 </div>
                             </div>
                             <div class="form-row">
@@ -112,9 +113,7 @@
 
 <script>
     export default {
-        mounted() {
-
-        },
+        mounted() {},
         data() {
             return {
                 loading: false,
@@ -134,6 +133,10 @@
                         address: '',
                         dob: '',
                     }
+                },
+                options: {
+                    format: 'DD/MM/YYYY',
+                    useCurrent: false,
                 }
             }
         },
@@ -144,8 +147,8 @@
                 axios.post('/api/admin/patient/create', this.form)
                     .then((res) => {
                         this.loading = false
-                        this.success = res.data.data
                         console.log(res.data)
+                        this.success = res.data.data
                     })
                     .catch((err) => {
                         this.loading = false
@@ -158,6 +161,7 @@
                 axios.post(`/api/admin/patient/${this.form.id}/update`, this.form)
                     .then((res) => {
                         this.loading = false
+                        console.log(res.data); return;
                         this.success = res.data.data
                         setTimeout(() => {
                             this.$router.go(-1);

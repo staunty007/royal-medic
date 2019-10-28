@@ -33,4 +33,6 @@ class Patient extends Model
     {
         return $this->hasOne(PatientBiodata::class);
     }
+
+
 }

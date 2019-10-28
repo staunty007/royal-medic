@@ -9,6 +9,12 @@ let mutations = {
     FETCH_USER(state, user) {
         return state.user = user
     },
+    FETCH_DOCTORS(state, doctors) {
+        return state.doctors = doctors
+    },
+    FETCH_APPOINTMENTS(state, appointments) {
+        return state.appointments = appointments
+    },
     UPLOAD_USER(state, user) {
         return state.user = user
     }

@@ -19,6 +19,7 @@
 
     <!-- Custom styles for this template-->
     <link href="/admin/css/sb-admin-2.min.css" rel="stylesheet">
+    {{-- <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/overcast/jquery-ui.css"> --}}
     <style>
         .router-link-exact-active {
             color: #fff;
@@ -88,9 +89,9 @@
                         <span>Schedule</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <router-link class="nav-link" to="/appointments">
                         <i class="fas fa-fw fa-cog"></i>
-                        <span>Appointment</span></a>
+                        <span>Appointment</span></router-link>
                 </li>
 
                 <!-- Nav Item - Tables -->
@@ -253,6 +254,9 @@
     </div>
 
     <script src="/js/app.js"></script>
+    {{-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+        integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+        crossorigin="anonymous"></script> --}}
     <script src="/admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- Core plugin JavaScript-->
     <script src="/admin/vendor/jquery-easing/jquery.easing.min.js"></script>

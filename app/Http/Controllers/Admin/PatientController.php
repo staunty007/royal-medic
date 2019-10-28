@@ -8,6 +8,8 @@ use App\User;
 use App\Patient;
 use App\PatientBiodata;
 use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
+use Illuminate\Support\Str;
 
 class PatientController extends Controller
 {
@@ -35,8 +37,9 @@ class PatientController extends Controller
 
         PatientBiodata::create([
             'patient_id' => $newUser->id,
+            'p_code' => rand(0000000,9999999),
             "blood_group" => $request->biodata['blood_group'],
-            "dob" => $request->biodata['dob'],
+            "dob" => $this->modifyDate($request->biodata['dob']),
             'address' => $request->biodata['address'],
             'mobile2' => $request->biodata['mobile2'],
             'status' => $newUser->status,
@@ -50,6 +53,9 @@ class PatientController extends Controller
         $newUser = $patient->findOrFail($id);
 
         #return $newUser->with('biodata')->first();
+        $a = $request->biodata['dob'];
+        $b = Carbon::createFromFormat('d/m/Y', $request->biodata['dob'])->format('Y-m-d');
+        #return [$a, $b];
 
         $newUser->fill([
             'name' => $request->fname ." ". $request->lname,
@@ -62,11 +68,12 @@ class PatientController extends Controller
         
         $newUser->biodata()->update([
             "blood_group" => $request->biodata['blood_group'],
-            "dob" => $request->biodata['dob'],
+            "dob" => $this->modifyDate($request->biodata['dob']),
             'address' => $request->biodata['address'],
             'mobile2' => $request->biodata['mobile2'],
             'status' => $newUser->status,
         ]);
+        
 
         return $this->successWithData('Patient Updated Successfully', 200);
     }
@@ -75,5 +82,11 @@ class PatientController extends Controller
     {
         $users = Patient::with('biodata')->get();
         return $this->successWithData($users, 200);
+    }
+
+    public function findPatient($p_code, PatientBiodata $patient)
+    {
+        return $patient->findByPCode($p_code, "name");
+
     }
 }

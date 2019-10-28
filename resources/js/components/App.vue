@@ -11,6 +11,8 @@
         },
         mounted() {
             this.$store.dispatch('uploadUser',this.user)
+            this.$store.dispatch('fetchDoctors');
+            this.$store.dispatch('fetchAppointments');
         }
     }
 </script>

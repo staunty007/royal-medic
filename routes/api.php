@@ -17,6 +17,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('/find-patient/{p_code}', 'Admin\PatientController@findPatient');
+
+Route::get('/appointment','AppointmentController@fetch');
+Route::post('/appointment','AppointmentController@store');
+
 Route::post('admin/doctor/create', 'Admin\DoctorController@store');
 Route::get('admin/doctors', 'Admin\DoctorController@fetch');
 Route::post('admin/doctor/{id}/update', 'Admin\DoctorController@update');

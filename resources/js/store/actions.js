@@ -8,14 +8,22 @@ let actions = {
     //     })
 
     // },
-    // fetchPosts({commit}) {
-    //     axios.get('/api/posts')
-    //         .then(res => {
-    //             commit('FETCH_POSTS', res.data)
-    //         }).catch(err => {
-    //         console.log(err)
-    //     })
-    // },
+    fetchDoctors({commit}) {
+        axios.get('/api/admin/doctors')
+            .then(res => {
+                commit('FETCH_DOCTORS', res.data.data)
+            }).catch(err => {
+            console.log(err)
+        })
+    },
+    fetchAppointments({commit}) {
+        axios.get('/api/appointment')
+            .then(res => {
+                commit('FETCH_APPOINTMENTS', res.data.data)
+            }).catch(err => {
+            console.log(err)
+        })
+    },
     // deletePost({commit}, post) {
     //     axios.delete(`/api/posts/${post.id}`)
     //         .then(res => {

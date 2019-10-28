@@ -3,7 +3,7 @@
         <!-- DataTales Example -->
         <div class="card shadow mb-4">
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-primary">Patient Records</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Appoitments</h6>
                 <button class="btn btn-primary" @click="openModal('add')">
                     Add New <i class="fas fa-user-plus fa-sm fa-fw"></i>
                 </button>
@@ -14,42 +14,42 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Name</th>
-                                <th>PCode</th>
-                                <th>Email</th>
-                                <th>Phone No</th>
-                                <th>Gender</th>
-                                <th>Blood Group</th>
-                                <th>Status</th>
-                                <th>Modify</th>
+                                <th>APPOINT ID</th>
+                                <th>PATIENT </th>
+                                <th>DOCTOR</th>
+                                <th>DEPARTMENT</th>
+                                <th>PROBLEM</th>
+                                <th>DATE</th>
+                                <th>STATUS</th>
+                                <th>MODIFY</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
                                 <th>ID</th>
-                                <th>Name</th>
-                                <th>PCode</th>
-                                <th>Email</th>
-                                <th>Phone No</th>
-                                <th>Gender</th>
-                                <th>Blood Group</th>
-                                <th>Status</th>
-                                <th>Modify</th>
+                                <th>APPOINT ID</th>
+                                <th>PATIENT</th>
+                                <th>DOCTOR</th>
+                                <th>DEPARTMENT</th>
+                                <th>PROBLEM</th>
+                                <th>DATE</th>
+                                <th>STATUS</th>
+                                <th>MODIFY</th>
                             </tr>
                         </tfoot>
                         <tbody>
-                            <tr v-for="(user, index) in users" :key="user.id">
+                            <tr v-for="(appoint, index) in appointments" :key="appoint.id">
                                 <td>{{ index + 1 }}</td>
-                                <td>{{ user.name }}</td>
-                                <td>{{ user.biodata.p_code }}</td>
-                                <td>{{ user.email }}</td>
-                                <td>{{ user.mobile }}</td>
-                                <td>{{ user.gender }}</td>
-                                <td>{{ user.biodata.blood_group.toUpperCase() }}</td>
-                                <td> 
+                                <td>{{ appoint.slot }}</td>
+                                <td>{{ appoint.patient.name }}</td>
+                                <td>{{ appoint.doctor.name }}</td>
+                                <td>{{ appoint.department }}</td>
+                                <td>{{ appoint.problem.slice(0,30) }}</td>
+                                <td>{{ appoint.date }}</td>
+                                <td>
                                     <span 
-                                    :class="{ 'badge-success': user.status == 1,'badge-danger': user.status == 0 }" 
-                                    class="badge"> {{ user.status == 1 ? 'Active' : 'Inactive' }}
+                                    :class="{ 'badge-success': appoint.status == 1,'badge-danger': appoint.status == 0 }" 
+                                    class="badge"> {{ appoint.status == 1 ? 'Active' : 'Inactive' }}
                                     </span>
                                 </td>
                                 <td>
@@ -78,23 +78,17 @@
         methods: {
             openModal(value, user = null) {
                 if (value == 'add') {
-                    this.$router.push('/patient');
+                    this.$router.push('/appointment');
                 } else {
-                    this.$router.push({ name: 'patient', params: { user: user } })
+                    this.$router.push({ name: 'appointment', params: { user: user } })
                 }
             },
 
-            async fetchUsers() {
-                await axios.get('/api/admin/patients')
-                .then((res) => {
-                   // console.log(res.data);
-                    this.users = res.data.data
-                })  
-            }
-
         },
-        mounted() {
-            this.fetchUsers();
+        computed: {
+            appointments() {
+                return this.$store.getters.appointments;
+            }
         }
     }
 
