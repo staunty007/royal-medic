@@ -2012,6 +2012,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {},
   data: function data() {
@@ -2127,6 +2137,23 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     alldoctors: function alldoctors() {
       return this.$store.getters.doctors;
     }
+  },
+  created: function created() {
+    if (this.$route.params.hasOwnProperty('appointment')) {
+      var newForm = this.$route.params.appointment;
+      this.form = {
+        id: newForm.id,
+        department: newForm.department,
+        doctor_id: newForm.doctor_id,
+        date: newForm.date,
+        problem: newForm.problem,
+        status: newForm.status,
+        patient_name: newForm.patient.name
+      };
+      this.title = "UPDATE";
+    } else {
+      this.title = "ADD";
+    }
   }
 });
 
@@ -2211,14 +2238,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      users: [],
+      appointment: '',
       resp: '',
       selectedUser: {}
     };
   },
   methods: {
     openModal: function openModal(value) {
-      var user = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+      var appointment = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
 
       if (value == 'add') {
         this.$router.push('/appointment');
@@ -2226,7 +2253,7 @@ __webpack_require__.r(__webpack_exports__);
         this.$router.push({
           name: 'appointment',
           params: {
-            user: user
+            appointment: appointment
           }
         });
       }
@@ -18279,6 +18306,17 @@ if ( !noGlobal ) {
 return jQuery;
 } );
 
+
+/***/ }),
+
+/***/ "./node_modules/jw-vue-pagination/lib/JwPagination.js":
+/*!************************************************************!*\
+  !*** ./node_modules/jw-vue-pagination/lib/JwPagination.js ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports=function(e){var t={};function s(r){if(t[r])return t[r].exports;var a=t[r]={i:r,l:!1,exports:{}};return e[r].call(a.exports,a,a.exports,s),a.l=!0,a.exports}return s.m=e,s.c=t,s.d=function(e,t,r){s.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:r})},s.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},s.t=function(e,t){if(1&t&&(e=s(e)),8&t)return e;if(4&t&&"object"==typeof e&&e&&e.__esModule)return e;var r=Object.create(null);if(s.r(r),Object.defineProperty(r,"default",{enumerable:!0,value:e}),2&t&&"string"!=typeof e)for(var a in e)s.d(r,a,function(t){return e[t]}.bind(null,a));return r},s.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return s.d(t,"a",t),t},s.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},s.p="",s(s.s=1)}([function(e,t,s){"use strict";e.exports=function(e,t,s,r){void 0===t&&(t=1),void 0===s&&(s=10),void 0===r&&(r=10);var a,n,i=Math.ceil(e/s);if(t<1?t=1:t>i&&(t=i),i<=r)a=1,n=i;else{var l=Math.floor(r/2),o=Math.ceil(r/2)-1;t<=l?(a=1,n=r):t+o>=i?(a=i-r+1,n=i):(a=t-l,n=t+o)}var c=(t-1)*s,u=Math.min(c+s-1,e-1),p=Array.from(Array(n+1-a).keys()).map(function(e){return a+e});return{totalItems:e,currentPage:t,pageSize:s,totalPages:i,startPage:a,endPage:n,startIndex:c,endIndex:u,pages:p}}},function(e,t,s){"use strict";s.r(t);var r=function(){var e=this,t=e.$createElement,s=e._self._c||t;return e.pager.pages&&e.pager.pages.length?s("ul",{staticClass:"pagination",style:e.ulStyles},[s("li",{staticClass:"page-item first",class:{disabled:1===e.pager.currentPage},style:e.liStyles},[s("a",{staticClass:"page-link",style:e.aStyles,on:{click:function(t){return e.setPage(1)}}},[e._v(e._s(e.labels.first))])]),e._v(" "),s("li",{staticClass:"page-item previous",class:{disabled:1===e.pager.currentPage},style:e.liStyles},[s("a",{staticClass:"page-link",style:e.aStyles,on:{click:function(t){return e.setPage(e.pager.currentPage-1)}}},[e._v(e._s(e.labels.previous))])]),e._v(" "),e._l(e.pager.pages,function(t){return s("li",{key:t,staticClass:"page-item page-number",class:{active:e.pager.currentPage===t},style:e.liStyles},[s("a",{staticClass:"page-link",style:e.aStyles,on:{click:function(s){return e.setPage(t)}}},[e._v(e._s(t))])])}),e._v(" "),s("li",{staticClass:"page-item next",class:{disabled:e.pager.currentPage===e.pager.totalPages},style:e.liStyles},[s("a",{staticClass:"page-link",style:e.aStyles,on:{click:function(t){return e.setPage(e.pager.currentPage+1)}}},[e._v(e._s(e.labels.next))])]),e._v(" "),s("li",{staticClass:"page-item last",class:{disabled:e.pager.currentPage===e.pager.totalPages},style:e.liStyles},[s("a",{staticClass:"page-link",style:e.aStyles,on:{click:function(t){return e.setPage(e.pager.totalPages)}}},[e._v(e._s(e.labels.last))])])],2):e._e()};r._withStripped=!0;var a=s(0),n=s.n(a);function i(e,t){var s=Object.keys(e);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter(function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable})),s.push.apply(s,r)}return s}function l(e){for(var t=1;t<arguments.length;t++){var s=null!=arguments[t]?arguments[t]:{};t%2?i(s,!0).forEach(function(t){o(e,t,s[t])}):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(s)):i(s).forEach(function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(s,t))})}return e}function o(e,t,s){return t in e?Object.defineProperty(e,t,{value:s,enumerable:!0,configurable:!0,writable:!0}):e[t]=s,e}var c={first:"First",last:"Last",previous:"Previous",next:"Next"},u={margin:0,padding:0,display:"inline-block"},p={listStyle:"none",display:"inline",textAlign:"center"},g={cursor:"pointer",padding:"6px 12px",display:"block",float:"left"};var f=function(e,t,s,r,a,n,i,l){var o,c="function"==typeof e?e.options:e;if(t&&(c.render=t,c.staticRenderFns=s,c._compiled=!0),r&&(c.functional=!0),n&&(c._scopeId="data-v-"+n),i?(o=function(e){(e=e||this.$vnode&&this.$vnode.ssrContext||this.parent&&this.parent.$vnode&&this.parent.$vnode.ssrContext)||"undefined"==typeof __VUE_SSR_CONTEXT__||(e=__VUE_SSR_CONTEXT__),a&&a.call(this,e),e&&e._registeredComponents&&e._registeredComponents.add(i)},c._ssrRegister=o):a&&(o=l?function(){a.call(this,this.$root.$options.shadowRoot)}:a),o)if(c.functional){c._injectStyles=o;var u=c.render;c.render=function(e,t){return o.call(t),u(e,t)}}else{var p=c.beforeCreate;c.beforeCreate=p?[].concat(p,o):[o]}return{exports:e,options:c}}({props:{items:{type:Array,required:!0},initialPage:{type:Number,default:1},pageSize:{type:Number,default:10},maxPages:{type:Number,default:10},labels:{type:Object,default:function(){return c}},styles:{type:Object},disableDefaultStyles:{type:Boolean,default:!1}},data:function(){return{pager:{},ulStyles:{},liStyles:{},aStyles:{}}},created:function(){if(!this.$listeners.changePage)throw'Missing required event listener: "changePage"';this.disableDefaultStyles||(this.ulStyles=u,this.liStyles=p,this.aStyles=g),this.styles&&(this.ulStyles=l({},this.ulStyles,{},this.styles.ul),this.liStyles=l({},this.liStyles,{},this.styles.li),this.aStyles=l({},this.aStyles,{},this.styles.a)),this.setPage(this.initialPage)},methods:{setPage:function(e){var t=this.items,s=this.pageSize,r=this.maxPages,a=n()(t.length,e,s,r),i=t.slice(a.startIndex,a.endIndex+1);this.pager=a,this.$emit("changePage",i)}},watch:{items:function(){this.setPage(this.initialPage)}}},r,[],!1,null,null,null);f.options.__file="src/JwPagination.vue";t.default=f.exports}]);
 
 /***/ }),
 
@@ -60484,7 +60522,7 @@ var render = function() {
             },
             [
               _c("h6", { staticClass: "m-0 font-weight-bold text-primary" }, [
-                _vm._v("ADD APPOINTMENT\n                    ")
+                _vm._v(_vm._s(_vm.title) + " APPOINTMENT\n                    ")
               ]),
               _vm._v(" "),
               _c(
@@ -60512,88 +60550,106 @@ var render = function() {
                   [_vm._v("Patient\n                                Code")]
                 ),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-sm-5" }, [
-                  !_vm.p_name
-                    ? _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.form.p_code,
-                            expression: "form.p_code"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: { type: "text" },
-                        domProps: { value: _vm.form.p_code },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
+                _vm.title == "ADD"
+                  ? _c("div", { staticClass: "col-sm-5" }, [
+                      !_vm.p_name
+                        ? _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.form.p_code,
+                                expression: "form.p_code"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: { type: "text" },
+                            domProps: { value: _vm.form.p_code },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.form,
+                                  "p_code",
+                                  $event.target.value
+                                )
+                              }
                             }
-                            _vm.$set(_vm.form, "p_code", $event.target.value)
-                          }
-                        }
-                      })
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.p_name
-                    ? _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.p_name,
-                            expression: "p_name"
-                          }
-                        ],
+                          })
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.p_name
+                        ? _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.p_name,
+                                expression: "p_name"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: { type: "text", readonly: "" },
+                            domProps: { value: _vm.p_name },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.p_name = $event.target.value
+                              }
+                            }
+                          })
+                        : _vm._e()
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.title == "UPDATE"
+                  ? _c("div", { staticClass: "col-sm-5" }, [
+                      _c("input", {
                         staticClass: "form-control",
                         attrs: { type: "text", readonly: "" },
-                        domProps: { value: _vm.p_name },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.p_name = $event.target.value
-                          }
-                        }
+                        domProps: { value: _vm.form.patient_name }
                       })
-                    : _vm._e()
-                ]),
+                    ])
+                  : _vm._e(),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-sm-1" }, [
-                  !_vm.p_name
-                    ? _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-info",
-                          attrs: {
-                            disabled: _vm.form.p_code.trim() == "",
-                            type: "button"
-                          },
-                          on: { click: _vm.findPatient }
-                        },
-                        [_c("i", { staticClass: "fas fa-fw fa-cog" })]
-                      )
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _vm.p_name
-                    ? _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-danger",
-                          attrs: { type: "button" },
-                          on: {
-                            click: function($event) {
-                              _vm.p_name = ""
-                            }
-                          }
-                        },
-                        [_c("i", { staticClass: "fas fa-fw fa-cog" })]
-                      )
-                    : _vm._e()
-                ]),
+                _vm.title == "ADD"
+                  ? _c("div", { staticClass: "col-sm-1" }, [
+                      !_vm.p_name
+                        ? _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-info",
+                              attrs: {
+                                disabled: _vm.form.p_code.trim() == "",
+                                type: "button"
+                              },
+                              on: { click: _vm.findPatient }
+                            },
+                            [_c("i", { staticClass: "fas fa-fw fa-cog" })]
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.p_name
+                        ? _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-danger",
+                              attrs: { type: "button" },
+                              on: {
+                                click: function($event) {
+                                  _vm.p_name = ""
+                                }
+                              }
+                            },
+                            [_c("i", { staticClass: "fas fa-fw fa-cog" })]
+                          )
+                        : _vm._e()
+                    ])
+                  : _vm._e(),
                 _vm._v(" "),
                 _c("div", { staticClass: "col-sm-3" }, [
                   _vm.error.p_code
@@ -60728,7 +60784,12 @@ var render = function() {
                       return _c(
                         "option",
                         { key: doctor.id, domProps: { value: doctor.id } },
-                        [_vm._v(_vm._s(doctor.name))]
+                        [
+                          _vm._v(
+                            "\n                                        " +
+                              _vm._s(doctor.name)
+                          )
+                        ]
                       )
                     }),
                     0
@@ -60872,15 +60933,32 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "form-group row" }, [
                 _c("div", { staticClass: "col-sm-3" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-primary",
-                      attrs: { type: "button", disabled: !_vm.patientFound },
-                      on: { click: _vm.makeAppointment }
-                    },
-                    [_vm._v(_vm._s(_vm.loading ? "Adding..." : "Add New"))]
-                  ),
+                  _vm.title == "ADD"
+                    ? _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary",
+                          attrs: {
+                            type: "button",
+                            disabled: !_vm.patientFound
+                          },
+                          on: { click: _vm.makeAppointment }
+                        },
+                        [_vm._v(_vm._s(_vm.loading ? "Adding..." : "Add New"))]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.title == "UPDATE"
+                    ? _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-primary",
+                          attrs: { type: "button" },
+                          on: { click: _vm.updateAppointment }
+                        },
+                        [_vm._v(_vm._s(_vm.loading ? "Updating..." : "Update"))]
+                      )
+                    : _vm._e(),
                   _vm._v(" "),
                   _c(
                     "button",
@@ -60897,7 +60975,12 @@ var render = function() {
                     ? _c(
                         "h5",
                         { staticClass: "text-success font-weight-bold" },
-                        [_vm._v(" " + _vm._s(_vm.success.toUpperCase()))]
+                        [
+                          _vm._v(
+                            "\n                                    " +
+                              _vm._s(_vm.success.toUpperCase())
+                          )
+                        ]
                       )
                     : _vm._e()
                 ])
@@ -61022,7 +61105,7 @@ var render = function() {
                           staticClass: "btn btn-primary",
                           on: {
                             click: function($event) {
-                              return _vm.openModal("edit", _vm.user)
+                              return _vm.openModal("edit", appoint)
                             }
                           }
                         },
@@ -78699,8 +78782,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_bootstrap_datetimepicker__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_bootstrap_datetimepicker__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var pc_bootstrap4_datetimepicker_build_css_bootstrap_datetimepicker_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css */ "./node_modules/pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css");
 /* harmony import */ var pc_bootstrap4_datetimepicker_build_css_bootstrap_datetimepicker_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(pc_bootstrap4_datetimepicker_build_css_bootstrap_datetimepicker_css__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _routes_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./routes.js */ "./resources/js/routes.js");
-/* harmony import */ var _store_index_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./store/index.js */ "./resources/js/store/index.js");
+/* harmony import */ var jw_vue_pagination__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! jw-vue-pagination */ "./node_modules/jw-vue-pagination/lib/JwPagination.js");
+/* harmony import */ var jw_vue_pagination__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(jw_vue_pagination__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _routes_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./routes.js */ "./resources/js/routes.js");
+/* harmony import */ var _store_index_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./store/index.js */ "./resources/js/store/index.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -78712,6 +78797,8 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 
 
 Vue.use(vue_bootstrap_datetimepicker__WEBPACK_IMPORTED_MODULE_0___default.a);
+
+Vue.use(jw_vue_pagination__WEBPACK_IMPORTED_MODULE_2___default.a);
 
 
 /**
@@ -78733,8 +78820,8 @@ Vue.component('main-app', __webpack_require__(/*! ./components/App.vue */ "./res
 
 var app = new Vue({
   el: '#app',
-  store: _store_index_js__WEBPACK_IMPORTED_MODULE_3__["default"],
-  router: _routes_js__WEBPACK_IMPORTED_MODULE_2__["default"]
+  store: _store_index_js__WEBPACK_IMPORTED_MODULE_4__["default"],
+  router: _routes_js__WEBPACK_IMPORTED_MODULE_3__["default"]
 });
 
 /***/ }),
@@ -79420,6 +79507,7 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.
 Vue.use(vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]);
 var routes = [{
   path: '/appointment',
+  name: 'appointment',
   component: __webpack_require__(/*! ./components/AppointmentMod.vue */ "./resources/js/components/AppointmentMod.vue")["default"]
 }, {
   path: '/appointments',
@@ -79459,6 +79547,14 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 var actions = {
   // createPost({commit}, post) {
   //     axios.post('/api/posts', post)
@@ -79468,22 +79564,68 @@ var actions = {
   //         console.log(err)
   //     })
   // },
-  fetchDoctors: function fetchDoctors(_ref) {
-    var commit = _ref.commit;
-    axios.get('/api/admin/doctors').then(function (res) {
-      commit('FETCH_DOCTORS', res.data.data);
-    })["catch"](function (err) {
-      console.log(err);
-    });
-  },
-  fetchAppointments: function fetchAppointments(_ref2) {
-    var commit = _ref2.commit;
-    axios.get('/api/appointment').then(function (res) {
-      commit('FETCH_APPOINTMENTS', res.data.data);
-    })["catch"](function (err) {
-      console.log(err);
-    });
-  },
+  fetchDoctors: function () {
+    var _fetchDoctors = _asyncToGenerator(
+    /*#__PURE__*/
+    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee(_ref) {
+      var commit;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              commit = _ref.commit;
+              _context.next = 3;
+              return axios.get('/api/admin/doctors').then(function (res) {
+                commit('FETCH_DOCTORS', res.data.data);
+              })["catch"](function (err) {
+                console.log(err);
+              });
+
+            case 3:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    function fetchDoctors(_x) {
+      return _fetchDoctors.apply(this, arguments);
+    }
+
+    return fetchDoctors;
+  }(),
+  fetchAppointments: function () {
+    var _fetchAppointments = _asyncToGenerator(
+    /*#__PURE__*/
+    _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2(_ref2) {
+      var commit;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              commit = _ref2.commit;
+              _context2.next = 3;
+              return axios.get('/api/appointment').then(function (res) {
+                commit('FETCH_APPOINTMENTS', res.data.data);
+              })["catch"](function (err) {
+                console.log(err);
+              });
+
+            case 3:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }));
+
+    function fetchAppointments(_x2) {
+      return _fetchAppointments.apply(this, arguments);
+    }
+
+    return fetchAppointments;
+  }(),
   // deletePost({commit}, post) {
   //     axios.delete(`/api/posts/${post.id}`)
   //         .then(res => {

@@ -5,7 +5,7 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 const routes = [
-    { path: '/appointment', component: require('./components/AppointmentMod.vue').default },
+    { path: '/appointment', name: 'appointment', component: require('./components/AppointmentMod.vue').default },
     { path: '/appointments', component: require('./components/Appointments.vue').default },
     { path: '/dashboard', component: require('./components/Dashboard.vue').default },
     { path: '/profile', component: require('./components/Profile.vue').default },

@@ -53,7 +53,7 @@
                                     </span>
                                 </td>
                                 <td>
-                                    <button @click="openModal('edit', user)" class="btn btn-primary"><i class="fas fa-edit"></i></button>
+                                    <button @click="openModal('edit', appoint)" class="btn btn-primary"><i class="fas fa-edit"></i></button>
                                     <button class="btn btn-danger"><i class="fas fa-trash"></i></button>
                                 </td>
                             </tr>
@@ -70,17 +70,17 @@
     export default {
         data() {
             return {
-                users: [],
+                appointment:'',
                 resp: '',
                 selectedUser: {}
             }
         },
         methods: {
-            openModal(value, user = null) {
+            openModal(value, appointment = null) {
                 if (value == 'add') {
                     this.$router.push('/appointment');
                 } else {
-                    this.$router.push({ name: 'appointment', params: { user: user } })
+                    this.$router.push({ name: 'appointment', params: { appointment: appointment } })
                 }
             },
 

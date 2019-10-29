@@ -6,9 +6,9 @@
 
                 <div class="card shadow mb-4">
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h6 class="m-0 font-weight-bold text-primary">ADD APPOINTMENT
+                        <h6 class="m-0 font-weight-bold text-primary">{{ title }} APPOINTMENT
                         </h6>
-                        <router-link class="btn btn-info" to="/appointments" >
+                        <router-link class="btn btn-info" to="/appointments">
                             <i class="fas fa-caret-left fa-sm fa-fw"></i> APPOINTMENTS
                         </router-link>
                     </div>
@@ -17,18 +17,22 @@
                             <div class="form-group row">
                                 <label for="" class="col-sm-2 col-form-label text-dark font-weight-bold">Patient
                                     Code</label>
-                                <div class="col-sm-5">
+                                <div class="col-sm-5" v-if="title == 'ADD'">
                                     <input type="text" v-if="!p_name" v-model="form.p_code" class="form-control">
                                     <input type="text" v-if="p_name" v-model="p_name" readonly class="form-control">
                                 </div>
-                                <div class="col-sm-1">
-                                    <button v-if="!p_name" @click="findPatient" :disabled="form.p_code.trim()==''" type="button" class="btn btn-info"><i
-                                            class="fas fa-fw fa-cog"></i></button>
+                                <div class="col-sm-5" v-if="title == 'UPDATE'">
+                                    <input type="text" :value="form.patient_name" readonly class="form-control">
+                                </div>
+                                <div class="col-sm-1" v-if="title == 'ADD'">
+                                    <button v-if="!p_name" @click="findPatient" :disabled="form.p_code.trim()==''"
+                                        type="button" class="btn btn-info"><i class="fas fa-fw fa-cog"></i></button>
                                     <button v-if="p_name" @click="p_name = ''" type="button" class="btn btn-danger"><i
                                             class="fas fa-fw fa-cog"></i></button>
                                 </div>
                                 <div class="col-sm-3">
-                                    <small class="text-danger font-weight-bold" v-if="error.p_code">{{ error.p_code }}</small>
+                                    <small class="text-danger font-weight-bold"
+                                        v-if="error.p_code">{{ error.p_code }}</small>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -50,7 +54,8 @@
                                     Name</label>
                                 <div class="col-sm-7">
                                     <select v-model="form.doctor_id" id="" class="form-control">
-                                        <option :value="doctor.id" v-for="doctor in doctors" :key="doctor.id">{{ doctor.name }}</option>
+                                        <option :value="doctor.id" v-for="doctor in doctors" :key="doctor.id">
+                                            {{ doctor.name }}</option>
                                     </select>
                                 </div>
                             </div>
@@ -64,7 +69,8 @@
                             <div class="form-group row">
                                 <label for="" class="col-sm-2 col-form-label text-dark font-weight-bold">Problem</label>
                                 <div class="col-sm-7">
-                                    <textarea v-model="form.problem" id="" cols="30" rows="5" class="form-control"></textarea>
+                                    <textarea v-model="form.problem" id="" cols="30" rows="5"
+                                        class="form-control"></textarea>
                                 </div>
                             </div>
                             <div class="form-group row">
@@ -72,7 +78,8 @@
                                 <div class="col-sm-7">
                                     <div class="form-check">
                                         <label class="radio-inline mr-1">
-                                            <input type="radio" name="status" value="1" v-model="form.status" checked="checked">
+                                            <input type="radio" name="status" value="1" v-model="form.status"
+                                                checked="checked">
                                             <span class="font-weight-bold">Active</span> </label>
                                         <label class="radio-inline ml-1">
                                             <input type="radio" name="status" value="0" v-model="form.status"> <span
@@ -83,12 +90,15 @@
 
                             <div class="form-group row">
                                 <div class="col-sm-3">
-                                    <button type="button" @click="makeAppointment" :disabled="!patientFound" 
-                                    class="btn btn-primary">{{ loading ? 'Adding...' : 'Add New' }}</button>
+                                    <button v-if="title=='ADD'" type="button" @click="makeAppointment" :disabled="!patientFound"
+                                        class="btn btn-primary">{{ loading ? 'Adding...' : 'Add New' }}</button>
+                                    <button v-if="title=='UPDATE'" type="button" @click="updateAppointment" 
+                                        class="btn btn-primary">{{ loading ? 'Updating...' : 'Update' }}</button>
                                     <button type="button" class="btn btn-danger">Cancel</button>
                                 </div>
                                 <div class="col-sm-7">
-                                    <h5 class="text-success font-weight-bold" v-if="success"> {{ success.toUpperCase() }}</h5>
+                                    <h5 class="text-success font-weight-bold" v-if="success">
+                                        {{ success.toUpperCase() }}</h5>
                                 </div>
                             </div>
                         </form>
@@ -118,7 +128,7 @@
                     department: '',
                     doctor_id: '',
                     date: '',
-                    problem:'',
+                    problem: '',
                     status: 0,
                 },
                 options: {
@@ -141,7 +151,9 @@
                     })
                     .catch((err) => {
                         console.log(err.response.data.message);
-                        this.error = { 'p_code': err.response.data.message };
+                        this.error = {
+                            'p_code': err.response.data.message
+                        };
                     })
             },
             makeAppointment() {
@@ -189,6 +201,23 @@
         computed: {
             alldoctors() {
                 return this.$store.getters.doctors;
+            }
+        },
+        created() {
+            if (this.$route.params.hasOwnProperty('appointment')) {
+                let newForm = this.$route.params.appointment
+                this.form = {
+                    id: newForm.id,
+                    department: newForm.department,
+                    doctor_id: newForm.doctor_id,
+                    date: newForm.date,
+                    problem: newForm.problem,
+                    status: newForm.status,
+                    patient_name: newForm.patient.name
+                }
+                this.title = "UPDATE";
+            } else {
+                this.title = "ADD";
             }
         }
     }

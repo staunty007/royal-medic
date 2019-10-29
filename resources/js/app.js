@@ -12,6 +12,9 @@ import datePicker from 'vue-bootstrap-datetimepicker';
 import 'pc-bootstrap4-datetimepicker/build/css/bootstrap-datetimepicker.css';
 Vue.use(datePicker);
 
+import JwPagination from 'jw-vue-pagination';
+Vue.use(JwPagination);
+
 import router from './routes.js';
 import store from './store/index.js';
 /**

@@ -8,16 +8,16 @@ let actions = {
     //     })
 
     // },
-    fetchDoctors({commit}) {
-        axios.get('/api/admin/doctors')
+    async fetchDoctors({commit}) {
+      await  axios.get('/api/admin/doctors')
             .then(res => {
                 commit('FETCH_DOCTORS', res.data.data)
             }).catch(err => {
             console.log(err)
         })
     },
-    fetchAppointments({commit}) {
-        axios.get('/api/appointment')
+    async fetchAppointments({commit}) {
+      await  axios.get('/api/appointment')
             .then(res => {
                 commit('FETCH_APPOINTMENTS', res.data.data)
             }).catch(err => {
